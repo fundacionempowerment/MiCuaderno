@@ -12,7 +12,7 @@ use app\models\User;
 use app\models\CoachModel;
 use app\models\ClientModel;
 use app\models\Goal;
-use app\models\GoalMilestone;
+use app\models\GoalObjective;
 use app\models\GoalResource;
 use app\models\Coachee;
 
@@ -187,33 +187,34 @@ class GoalController extends Controller {
         ]);
     }
 
-    public function actionNewMilestone($id) {
+    public function actionNewObjective($id, $parentId = null) {
         $goal = Goal::findOne(['id' => $id]);
-        $milestone = new GoalMilestone();
+        $objective = new GoalObjective();
+        $objective->parent_objective_id = $parentId;
 
-        if ($milestone->load(Yii::$app->request->post())) {
-            $goal->link('milestones', $milestone, ['goal_id', 'id']);
-            \Yii::$app->session->addFlash('success', \Yii::t('goal', 'Milestone has been succesfully created.'));
+        if ($objective->load(Yii::$app->request->post())) {
+            $goal->link('objectives', $objective, ['goal_id', 'id']);
+            \Yii::$app->session->addFlash('success', \Yii::t('goal', 'Objective has been succesfully created.'));
             return $this->redirect(['/goal/view', 'id' => $goal->id]);
         }
-        return $this->render('milestone-form', [
+        return $this->render('objective-form', [
                     'goal' => $goal,
-                    'milestone' => $milestone,
+                    'objective' => $objective,
         ]);
     }
 
-    public function actionEditMilestone($id) {
-        $milestone = GoalMilestone::findOne(['id' => $id]);
-        $goal = $milestone->goal;
+    public function actionEditObjective($id) {
+        $objective = GoalObjective::findOne(['id' => $id]);
+        $goal = $objective->goal;
 
-        if ($milestone->load(Yii::$app->request->post()) && $milestone->save()) {
-            $goal->link('milestones', $milestone, ['goal_id', 'id']);
-            \Yii::$app->session->addFlash('success', \Yii::t('goal', 'Milestone has been succesfully created.'));
+        if ($objective->load(Yii::$app->request->post()) && $objective->save()) {
+            $goal->link('objectives', $objective, ['goal_id', 'id']);
+            \Yii::$app->session->addFlash('success', \Yii::t('goal', 'Objective has been succesfully created.'));
             return $this->redirect(['/goal/view', 'id' => $goal->id]);
         }
-        return $this->render('milestone-form', [
+        return $this->render('objective-form', [
                     'goal' => $goal,
-                    'milestone' => $milestone,
+                    'objective' => $objective,
         ]);
     }
 
@@ -230,14 +231,14 @@ class GoalController extends Controller {
 
     public function actionPlan($coachee_id) {
         $coachee = Coachee::findOne(['id' => $coachee_id]);
-        $milestones = GoalMilestone::getPlan($coachee_id);
+        $objectives = GoalObjective::getPlan($coachee_id);
 
         if (Yii::$app->request->get('printable') != null)
             $this->layout = 'printable';
 
         return $this->render('plan', [
                     'coachee' => $coachee,
-                    'milestones' => $milestones,
+                    'objectives' => $objectives,
         ]);
     }
 

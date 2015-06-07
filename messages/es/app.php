@@ -17,22 +17,22 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Access denied' => 'Acceso denegado',
     'Cancel' => 'Cancelar',
     'Date' => 'Fecha',
     'Description' => 'Descripción',
     'Edit' => 'Editar',
     'Email' => 'Correo eletrónico',
-    'High' => 'Alto',
     'Home' => 'Inicio',
     'Logout' => 'Salir',
-    'Low' => 'Bajo',
-    'Medium' => 'Medio',
     'Name' => 'Nombre',
     'Powered by' => 'Potenciado por',
     'Printable' => 'Imprimible',
+    'Problem while saving: ' => 'Problame para guardar: ',
     'Register' => 'Registrar',
     'Save' => 'Salvar',
     'Sign in' => 'Ingresar',
     'Sign up' => 'Registrese',
-    'Type' => 'Tipo',
+    'Users' => 'Usuarios',
+    'Welcome!' => '¡Bienvenido!',
 ];

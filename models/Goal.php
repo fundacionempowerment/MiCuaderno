@@ -46,8 +46,8 @@ class Goal extends ActiveRecord {
         return $this->hasMany(GoalResource::className(), ['goal_id' => 'id'])->orderBy(['is_desired' => SORT_DESC]);
     }
 
-    public function getMilestones() {
-        return $this->hasMany(GoalMilestone::className(), ['goal_id' => 'id']);
+    public function getObjectives() {
+        return $this->hasMany(GoalObjective::className(), ['goal_id' => 'id'])->where('parent_objective_id is null');
     }
 
     public function getResourcesToConserve() {
