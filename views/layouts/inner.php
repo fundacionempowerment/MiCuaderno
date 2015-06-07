@@ -15,7 +15,7 @@ $isCoach = Yii::$app->user->identity->is_coach;
 
 $items[] = ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']];
 if ($isCoach)
-    $items[] = ['label' => Yii::t('user', 'Coachees'), 'url' => ['/coachee']];
+    $items[] = ['label' => Yii::t('user', 'My Coachees'), 'url' => ['/coachee']];
 $items[] = ['label' => Yii::t('user', 'My account'), 'url' => ['/account']];
 $items[] = ['label' => Yii::t('app', 'Logout') . ' (' . Yii::$app->user->identity->username . ')',
     'url' => ['/site/logout'],
@@ -38,13 +38,12 @@ $items[] = ['label' => Yii::t('app', 'Logout') . ' (' . Yii::$app->user->identit
         <div class="wrap">
             <?php
             NavBar::begin([
+                'brandLabel' => 'Cuaderno del Coach CPI',
+                'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-default navbar-fixed-top',
                 ],
             ]);
-            echo Html::img('@web/images/logo.png', ['alt' => 'logo',
-                'class' => 'image-responsive', 'height' => '35px', 'style' => 'margin-top: 6px',]);
-
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => $items,

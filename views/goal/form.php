@@ -12,7 +12,7 @@ use kartik\widgets\DatePicker;
 /* @var $model app\models\LoginForm */
 
 $this->title = Yii::t('goal', 'New goal');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('user', 'Coachees'), 'url' => ['/coachee']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('user', 'My Coachees'), 'url' => ['/coachee']];
 $this->params['breadcrumbs'][] = ['label' => $goal->coachee->fullname, 'url' => ['/coachee/view', 'id' => $goal->coachee->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

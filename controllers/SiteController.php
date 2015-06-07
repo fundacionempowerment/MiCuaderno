@@ -80,7 +80,7 @@ class SiteController extends Controller {
             return $this->redirect(['/coachee']);
         else {
             Yii::$app->session->set('coachee_id', Yii::$app->user->id);
-            return $this->redirect(['/client/view', ['id' => Yii::$app->user->id]]);
+            return $this->redirect(['/coachee/view', ['id' => Yii::$app->user->id]]);
         }
     }
 

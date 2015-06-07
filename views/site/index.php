@@ -9,7 +9,8 @@ $this->title = 'Cuaderno del Coach CPI';
 ?>
 <div class="site-index">
     <div class="jumbotron">
-        <h1><?= \Yii::t('app', 'Cuaderno del CPI') ?></h1>
+        <h1>Cuaderno del Coach CPI</h1>
+        <h2><?= Yii::t('app', 'Welcome!') ?></h2>
     </div>
     <div class="body-content">
         <div class="row">

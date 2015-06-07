@@ -9,7 +9,7 @@ use kartik\widgets\DatePicker;
 use app\models\GoalMilestone;
 
 $this->title = Yii::t('goal', 'Action plan');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('user', 'Coachees'), 'url' => ['/coachee']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('user', 'My Coachees'), 'url' => ['/coachee']];
 $this->params['breadcrumbs'][] = ['label' => $coachee->fullname, 'url' => ['/coachee/view', 'id' => $coachee->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
