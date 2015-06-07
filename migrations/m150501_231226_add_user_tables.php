@@ -2,6 +2,7 @@
 
 use yii\db\Schema;
 use yii\db\Migration;
+use app\models\User;
 
 class m150501_231226_add_user_tables extends Migration {
 
@@ -29,6 +30,21 @@ class m150501_231226_add_user_tables extends Migration {
                 ], $tableOptions);
 
         $this->addForeignKey('fk_user_coach', '{{%user}}', 'coach_id', '{{%user}}', 'id');
+
+        $this->insert('{{%user}}', [
+            'id' => 1,
+            'username' => 'admin',
+            // password is 'admin' but hashed
+            'password_hash' => '$2y$13$C30KWvYxAXRIbv35bDVm5unJIhJOSQoQ7vLup3Ys68RFEYO9SY52.',
+            'auth_key' => '',
+            'email' => 'admin@fake.com',
+            'name' => 'Adminitrator',
+            'surname' => 'of Cuaderno',
+            'is_coach' => true,
+            'status' => User::STATUS_ACTIVE,
+            'created_at' => 0,
+            'updated_at' => 0,
+        ]);
     }
 
     public function down() {

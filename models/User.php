@@ -13,6 +13,8 @@ class User extends ActiveRecord implements IdentityInterface {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
+    public $password;
+    public $password_confirm;
     public $fullname;
 
     /**
@@ -36,8 +38,13 @@ class User extends ActiveRecord implements IdentityInterface {
      */
     public function rules() {
         return [
+            [['name', 'surname', 'email', 'username'], 'required'],
+            [['name', 'surname', 'email', 'username', 'password', 'password_confirm', 'is_coach', 'is_administrator'], 'safe'],
+            [['name', 'surname', 'email', 'username'], 'filter', 'filter' => 'trim'],
+            ['email', 'email'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            ['password_confirm', 'compare', 'compareAttribute' => 'password'],
         ];
     }
 
@@ -46,6 +53,31 @@ class User extends ActiveRecord implements IdentityInterface {
      */
     public static function findIdentity($id) {
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    public function attributeLabels() {
+        return [
+            'username' => Yii::t('user', 'Username'),
+            'password' => Yii::t('user', 'Password'),
+            'password_confirm' => Yii::t('user', 'Password confirmation'),
+            'is_administrator' => Yii::t('user', 'Is administrator'),
+            'name' => Yii::t('app', 'Name'),
+            'surname' => Yii::t('user', 'Surname'),
+            'email' => Yii::t('app', 'Email'),
+            'fullname' => Yii::t('app', 'Name'),
+        ];
+    }
+
+    public function afterFind() {
+        $this->fullname = $this->name . ' ' . $this->surname;
+        parent::afterFind();
+    }
+
+    public function beforeSave($insert) {
+        if ($this->password != '')
+            $this->setPassword($this->password);
+
+        return parent::beforeSave($insert);
     }
 
     /**
@@ -80,11 +112,6 @@ class User extends ActiveRecord implements IdentityInterface {
                     'password_reset_token' => $token,
                     'status' => self::STATUS_ACTIVE,
         ]);
-    }
-
-    public function afterFind() {
-        $this->fullname = $this->name . ' ' . $this->surname;
-        parent::afterFind();
     }
 
     /**
