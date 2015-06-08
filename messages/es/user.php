@@ -34,7 +34,7 @@ return [
     'My Coachees' => 'Mi Coachees',
     'My account' => 'Mi cuenta',
     'New coachee' => 'Nuevo coachee',
-    'New user' => '',
+    'New user' => 'Nuevo usuario',
     'Password' => 'Contraseña',
     'Password confirmation' => 'Confirmar contraseña',
     'Passwords don\'t match.' => 'Contraseñas no coinciden',
